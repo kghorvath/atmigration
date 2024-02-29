@@ -1,0 +1,7 @@
+This is a bash script to (semi) automate the process of migrating accounts between AT Protocol personal data servers (PDS). See https://github.com/bluesky-social/pds/blob/main/ACCOUNT_MIGRATION.md for more information.
+
+---
+IMPORTANT NOTE: While functional, this is a draft that includes *NO* error checking. Please note that PDS migrations have the potential to lock you out of your account if you do not know what you are doing. Please only use this script if you are aware of the steps required to conduct the migration. If you are migrating off of bsky.social, pleae also note that this operation is PERMANENT, as there is currently no way to migrate back. The script will give you one last chance at the end to check everything before committing the transfer - I STRONGLY encourage you to use this opportunity to ensure that the script has properly conducted the previous steps correctly. I take absolutely no responsibility if this script locks you out or damages your account. You have been warned!
+---
+
+To use, simply run the script and it will prompt you for the credentials of your existing account, as well as the credentials for the new account that will be created as part of this process. You'll need an invite code from the destination PDS to proceed. During the process, you will be prompted to check your email for a PLC operation token that will be required to sign and comple the PLC transfer operation.
