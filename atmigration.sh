@@ -3,7 +3,7 @@
 #Initial warning
 echo "This script will assist in migrating an AT Protocol account between two personal data servers (PDS). Note: This script DOES NOT PERFORM ANY ERROR CHECKING. You are responsible for confirming that all steps have proceeded correctly. I take absolutely no responsibility for anything that occurs as a result of this script."
 read -p "If you understand and wish to proceed, type I UNDERSTAND: " ACCEPT
-if [ $ACCEPT != "I UNDERSTAND" ]
+if [ "$ACCEPT" != "I UNDERSTAND" ]
 then
    exit
 fi
