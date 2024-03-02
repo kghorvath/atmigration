@@ -2,7 +2,7 @@
 
 #Initial warning
 echo "This script will assist in migrating an AT Protocol account between two personal data servers (PDS). Note: This script DOES NOT PERFORM ANY ERROR CHECKING. You are responsible for confirming that all steps have proceeded correctly. I take absolutely no responsibility for anything that occurs as a result of this script."
-read -p "If you understand and wish to proceed, type I UNDERSTAND: " ACCEPT
+read -p "If you understand and Wish to proceed, type I UNDERSTAND: " ACCEPT
 if [ "$ACCEPT" != "I UNDERSTAND" ]
 then
    exit
@@ -36,6 +36,11 @@ SVC_AUTH=$(echo ${ORIG_AUTH} | jq -r '.token')
 #Create the destination account
 echo "Please enter the credentials for the new account you would like to create on the target PDS"
 read -p "Handle: @" DEST_HANDLE
+REGEX="^.*$DEST_PDS$"
+if ! [[ $DEST_HANDLE =~ $REGEX ]]; then
+  DEST_HANDLE="${DEST_HANDLE}.${DEST_PDS}"
+  echo "Using $DEST_HANDLE as handle. Ctrl-C if this is incorrect."
+fi
 read -s -p "Password (will not echo): " DEST_PASS
 read -p $'\n'"Email: " DEST_EMAIL
 read -p "Invite Code: " DEST_INVITE
