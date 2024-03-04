@@ -46,6 +46,10 @@ read -p $'\n'"Email: " DEST_EMAIL
 read -p "Invite Code: " DEST_INVITE
 DEST_ACCT_CREATE=$(curl --silent -L -X POST "https://${DEST_PDS}/xrpc/com.atproto.server.createAccount" -H 'Content-Type: application/json' -H 'Accept: application/json' -H "Authorization: Bearer ${SVC_AUTH}" --data-raw '{ "email": "'${DEST_EMAIL}'", "handle": "'${DEST_HANDLE}'", "did": "'${DID}'", "inviteCode": "'${DEST_INVITE}'", "password": "'${DEST_PASS}'" }')
 
+#Pause to check account creation output
+echo ${DEST_ACCT_CREATE}
+read -p "Press any key to continue..."
+
 #Fetch destination JWT token from new account
 DEST_JWT=$(echo ${DEST_ACCT_CREATE} | jq -r '.accessJwt')
 
