@@ -9,9 +9,11 @@ then
 fi
 
 #Get the credentials of the originating account
-read -p "Please enter the originating PDS you want to migrate from: " ORIG_PDS
+echo "Please enter the originating PDS you want to migrate from. Example: domain.tld or sub.domain.pds" 
+read -p "PDS:" ORIG_PDS
 
 echo "Please enter the credentials for the account you want to migrate."
+echo "Example: @handle.domain.tld"
 read -p "Handle: @" ORIG_HANDLE
 read -s -p "Password (will not echo): " ORIG_PASS
 
@@ -24,9 +26,11 @@ ORIG_ENDPOINT=$(echo ${ORIG_CRED} | jq -r '.didDoc.service[0].serviceEndpoint')
 ORIG_JWT=$(echo ${ORIG_CRED} | jq -r '.accessJwt')
 
 echo "Your DID is ${DID}"
+echo "If DID output is null something went wrong. Please check your handle and pds. After that start this script again."
 
 #Get the target PDS
-read -p "Please enter the target PDS you want to migrate to: " DEST_PDS
+echo "Please enter the target PDS you want to migrate to. Example: domain.tld or sub.domain.pds"
+read -p "Target PDS: " DEST_PDS
 
 #Get service auth from originating PDS
 echo "Fetching service auth..."
@@ -35,6 +39,7 @@ SVC_AUTH=$(echo ${ORIG_AUTH} | jq -r '.token')
 
 #Create the destination account
 echo "Please enter the credentials for the new account you would like to create on the target PDS"
+echo "Example: @handle.domain.tld"
 read -p "Handle: @" DEST_HANDLE
 REGEX="^.*$DEST_PDS$"
 if ! [[ $DEST_HANDLE =~ $REGEX ]]; then
